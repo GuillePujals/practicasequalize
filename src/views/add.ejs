@@ -22,14 +22,14 @@
         <label for="length">Duración</label>
         <input type="text" name="length">
         <label for="">Generos</label>
-        <section name= "genre_id">
+        <select name= "genre_id">
             <% for (let i = 0; i< generos.legth; i++){%>
             <option value="<%= generos[i].id %>">
                 <%= generos[i].name %>
             </option>
             <% } %>
 
-        </section>
+        </select>
         <button type="submit">Enviar</button>
     </form>
 
