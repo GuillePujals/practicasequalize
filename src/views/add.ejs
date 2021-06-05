@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='/css/style.css' />
+
+</head>
+<body>
+    <figure>
+        <img src="/img/logo-DH.png" alt="Logo Digital House">
+    </figure>    
+    <form action="/movies/create" method="POST">
+        <label for="title">Nombre</label>
+        <input type="text" name="title">
+        <label for="rating">Rating</label>
+        <input type="number" name="rating">
+        <label for="awards">Premios</label>
+        <input type="number" name="awards">
+        <label for="release_date">Fecha de creación</label>
+        <input type="datetime" name="release_date">
+        <label for="length">Duración</label>
+        <input type="text" name="length">
+        <label for="">Generos</label>
+        <section name= "genre_id">
+            <% for (let i = 0; i< generos.legth; i++){%>
+            <option value="<%= generos[i].id %>">
+                <%= generos[i].name %>
+            </option>
+            <% } %>
+
+        </section>
+        <button type="submit">Enviar</button>
+    </form>
+
+</body>
+</html>
