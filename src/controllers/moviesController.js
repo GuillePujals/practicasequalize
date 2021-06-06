@@ -15,7 +15,7 @@ const moviesController = {
 
     detail: (req, res) => {
         db.Movies.findByPk(req.params.id, {
-            include: [{assocition: "genero"}]
+            include: [{association: "genero"}]
         })
             .then((movie) => {
             res.render ('moviesDetail', {movie})
@@ -64,7 +64,7 @@ const moviesController = {
     },
     edit: async (req, res) => {
         let movie = await Movies.findByPk(req.params.id);
-        let generos = await Genres.findAll();
+        //let generos = await Genres.findAll();
 
         return res.render('edit', {movie}) 
     }
