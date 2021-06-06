@@ -1,7 +1,7 @@
 const db = require('../database/models');
 const sequelize = db.sequelize;
 const { Op } = require("sequelize");
-const {Genres} = require('../database/models');
+const {Genres, Movies} = require('../database/models');
 
 
 const moviesController = {
@@ -14,7 +14,9 @@ const moviesController = {
     },
 
     detail: (req, res) => {
-        db.Movies.findByPk(req.params.id)
+        db.Movies.findByPk(req.params.id, {
+            include: [{assocition: "genero"}]
+        })
             .then((movie) => {
             res.render ('moviesDetail', {movie})
             })
@@ -44,20 +46,29 @@ const moviesController = {
             res.render ('recommendedMovies', {movies})
             })
     },
-    add: (req, res) => {
-        db.Genres.findAll()
-        .then(generos => {
-            res.render('add', {generos})
-            
-        })
+    add: async (req, res) => {
+        let generos = await Genres.findAll()
         
+        return res.render('add', {generos}) 
     },
-    create: (req, res) => {
-        db.Movies.create({
-            name: req.body.name
+    create: async (req, res) => {
+        let newMovie = await Movies.create({
+            title: req.body.title,
+            rating: req.body.rating,
+            awards: req.body.awards,
+            release_date: req.body.release_date,
+            length: req.body.length,
+            genre_id:req.body.genre_id
         })
-        res.send('movies/create')
+        return res.send(newMovie)
+    },
+    edit: async (req, res) => {
+        let movie = await Movies.findByPk(req.params.id);
+        let generos = await Genres.findAll();
+
+        return res.render('edit', {movie}) 
     }
+    //update: 
 }
 
 module.exports = moviesController;

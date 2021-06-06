@@ -8,6 +8,7 @@ const genresController = {
     list: (req, res) => {
         db.Genres.findAll()
             .then(genres => {
+                console.log(genres);
                 res.render('genresList', {genres})
             })
     },

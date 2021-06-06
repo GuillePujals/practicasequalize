@@ -15,6 +15,10 @@ app.use(express.json());
 app.set('views', path.resolve(__dirname, './views'));
 app.set('view engine', 'ejs');
 
+//Para usar métodos put y delete
+const methodOverride = require ('method-override');
+app.use (methodOverride ('_method'));
+
 app.use(express.static(path.resolve(__dirname, '../public')));
 
 app.use('/', indexRouter);
